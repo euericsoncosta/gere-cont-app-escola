@@ -1,7 +1,7 @@
 class Aluno {
   static matriculaGeral = 0;
 
-  constructor(matricula, nome, idade, nota) {
+  constructor(nome, idade, nota) {
     this.matricula = Aluno.matriculaGeral++;
     this.nome = nome;
     this.idade = idade;
@@ -14,7 +14,16 @@ const alunos = [];
 
 class AlunoController {
   index(req, res) {
-    return res.render("alunos", alunos);
+    return res.render("alunos", { alunos });
+  }
+  store(req, res) {
+    req.body;
+    console.log(req.body);
+    const { nome, idade, nota } = req.body;
+    const aluno = new Aluno(nome, idade, nota);
+    console.log(`Objeto aluno criado: ${JSON.stringify(aluno)}`);
+    alunos.push(aluno);
+    res.redirect("/alunos");
   }
 }
 
